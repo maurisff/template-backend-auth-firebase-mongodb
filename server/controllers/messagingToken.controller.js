@@ -15,7 +15,7 @@ exports.postMessagingToken = async (req, res) => {
     const tokens = await repository.listarByFilter({ token });
 
     if (tokens && tokens.length > 0
-      && tokens.filter((t) => (t.usuarioId.toString() === usuarioId.toString() || (!t.usuarioId && !usuarioId))).length > 0) {
+      && tokens.filter((t) => ((t.usuarioId && t.usuarioId.toString() === usuarioId.toString()) || (!t.usuarioId && !usuarioId))).length > 0) {
       res.status(200).json(new ResponseInfor(true, 'OK'));
       return;
     }
